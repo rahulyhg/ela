@@ -1,0 +1,26 @@
+#playerPanel{
+	display: inline-block;
+	margin-left:20px;
+	background:#dddddd;
+}
+#songPanel{
+	height:100%;
+	margin:0px;
+	margin-right:50px;
+}
+p.song{
+	display:block;
+	margin:0;
+	margin-bottom:1px;
+	padding:10px;
+	border:black solid 2px;
+	background:#aa7000;
+	width:400px;
+}
+p.song:hover{
+	background:#507700;
+	cursor:pointer;
+}
+p.selected{
+	background:#aa3287;
+}
