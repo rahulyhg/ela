@@ -61,7 +61,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="span4">
+				<div class="span3">
 					<p>Another link here</p>
 					<p>Another link here</p>
 					<p>Another link here</p>

@@ -1,6 +1,8 @@
 <?php
-include "inc/database.class.php";
-include "inc/common.class.php";
+//include "inc/database.class.php";
+//include "inc/common.class.php";
+include "inc/create-db-structure.php";
+exit(0);
 include 'mobile/Mobile_Detect.php';
 session_start();
 $detect = new Mobile_Detect;

@@ -1,7 +1,7 @@
 <?php
 // Database Connection
-define("DB_USERNAME","kaakaiin_root");
-define("DB_PASSWORD","papiyasinha3__");
+define("DB_USERNAME","root");
+define("DB_PASSWORD","");
 define("DB_NAME","kaakaiin_songs");
 define("DB_HOST","localhost");
 define("DB_DEBUG",false);
