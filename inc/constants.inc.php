@@ -7,6 +7,10 @@ define("DB_HOST","localhost");
 define("DB_DEBUG",false);
 define("SERVER", $_SERVER['SERVER_NAME']."/");
 define("NAME", $_SERVER['SERVER_NAME']);
+define("SITE_NAME", "AmarEla");
+define("BASE_URL", "amarela.kaakai.in");
+define("FB_APP_ID", "1407103222879429");
+define("FB_ADMIN_ID", "100002233601582");
 
 //Email routes
 define("CONTACT_US_EMAIL", "uttam2k4@gmail.com");
