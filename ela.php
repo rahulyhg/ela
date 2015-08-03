@@ -1,7 +1,6 @@
 <?php include_once("inc/create-db-structure.php"); ?>
 
 <?php
-	echo "<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>";
     $album_name = "";
     $song_name = "";
     $is_streamable = FALSE;
@@ -29,9 +28,10 @@
 			$album_id = $row['album_id'];
 			$album_image_name = $row['album_image_location'];
 			$album_type = $row['album_type'];
+			$meta_fb_desc = $row['meta_fb_desc'];
 		}
 		define('PAGE_TITLE', $album_name . " | " . SITE_NAME);
-		$description = $album_name . " - A Bishnupriya Manipuri Album | Amar Ela - Site of online Bishnupriya Manipuri music store under KAAKAI Newspaper.";
+		$description = $album_name . " " . $meta_fb_desc . " - A Bishnupriya Manipuri Album | Amar Ela - Site of Bishnupriya Manipuri songs under KAAKAI Newspaper.";
 		define('PAGE_DESCRIPTION', $description);
 		$keyword = $album_name . " songs , " + $album_name . " online songs, " . $album_name . "online play";
 		define('PAGE_KEYWORDS', $keyword);
@@ -74,7 +74,7 @@
 							while($row = mysql_fetch_array($result))
 							{
 								$song_name = $row['song_name'];
-								$song_location = $row['song_link'];
+								$song_location = "audios/".$row['song_link'];
 								$song_artist = $row['song_artist'];
 								$song_contribution_artist = $row['song_contributing_artist'];
 								$song_genre = $row['song_genre'];
