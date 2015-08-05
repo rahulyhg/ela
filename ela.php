@@ -92,12 +92,28 @@
 					</div>
 				</div>
 				<div class="span3">
-					<p>Another link here</p>
-					<p>Another link here</p>
-					<p>Another link here</p>
-					<p>Another link here</p>
-					<p>Another link here</p>
-					<br/>
+					<?php
+						$maximum_albums_to_be_shown = 4;
+						$get_similar_albums = "SELECT * FROM streamable_album WHERE album_type LIKE '%$album_type%' AND album_type != '$album_type' ORDER BY RAND() LIMIT $maximum_albums_to_be_shown";
+						$get_similar_albums_result = Database::getInstance()->query($get_similar_albums);
+						
+						while($row = mysql_fetch_array($get_similar_albums_result))
+						{
+							echo $row['album_name'];
+						}
+						$total_no_of_similar_albums = mysql_num_rows($get_similar_albums_result);
+						if ($total_no_of_similar_albums < $maximum_albums_to_be_shown) {
+							$no_of_albums_left = $maximum_albums_to_be_shown - $total_no_of_similar_albums;
+							$get_similar_albums = "SELECT * FROM streamable_album WHERE album_type != '$album_type' ORDER BY RAND() LIMIT $no_of_albums_left";
+							$get_similar_albums_result = Database::getInstance()->query($get_similar_albums);
+							
+							while($row = mysql_fetch_array($get_similar_albums_result))
+							{
+								echo $row['album_name'];
+							}
+						}
+							
+					?>
 				</div>
 			</div>
 		<?php	
