@@ -19,21 +19,21 @@ else
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><?php echo PAGE_TITLE; ?></title>
-	<meta name="Description" content="<?php echo PAGE_DESCRIPTION; ?>">
-	<meta name="Keywords" content="<?php echo PAGE_KEYWORDS; ?>, amar ela, Bishnupriya Manipuri Online Song, Bishnupriya, Vishnupriya, Ela, manipuri ela, BM ela, Amar Thator Ela, amarela.kaakai.in">	
+	<title><?php echo $PAGE_TITLE; ?></title>
+	<meta name="Description" content="<?php echo $PAGE_DESCRIPTION; ?>">
+	<meta name="Keywords" content="<?php echo $PAGE_KEYWORDS; ?>, amar ela, Bishnupriya Manipuri Online Song, Bishnupriya, Vishnupriya, Ela, manipuri ela, BM ela, Amar Thator Ela, amarela.kaakai.in">	
 	<link rel="shortcut icon" href="img/logo/icon_songs.png" type="image/x-icon" />
-	<link rel="image_src" href="<?php echo ALBUM_IMAGE; ?>" />
-	<meta name="thumbnail" content="<?php echo ALBUM_IMAGE; ?>" />
+	<link rel="image_src" href="<?php echo $ALBUM_IMAGE; ?>" />
+	<meta name="thumbnail" content="<?php echo $ALBUM_IMAGE; ?>" />
 	
-	<meta property="og:title" content="<?php echo PAGE_TITLE; ?>" />
-	<meta property="og:image" content="<?php echo ALBUM_IMAGE; ?>" />
+	<meta property="og:title" content="<?php echo $PAGE_TITLE; ?>" />
+	<meta property="og:image" content="<?php echo $ALBUM_IMAGE; ?>" />
 	<meta property="og:image:width" content="600" />
 	<meta property="og:image:height" content="315" />
 	<meta property="og:site_name" content="<?php echo BASE_URL; ?>" />
 	<meta property="fb:app_id" content="<?php echo FB_APP_ID; ?>" />
 	<meta property="fb:admins" content="<?php echo FB_ADMIN_ID; ?>"/>
-	<meta property="og:description" content="<?php echo PAGE_DESCRIPTION; ?>" />
+	<meta property="og:description" content="<?php echo $PAGE_DESCRIPTION; ?>" />
 	
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css">
