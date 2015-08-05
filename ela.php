@@ -30,13 +30,14 @@
 			$album_type = $row['album_type'];
 			$meta_fb_desc = $row['meta_fb_desc'];
 		}
-		define('PAGE_TITLE', $album_name . " | " . SITE_NAME);
-		$description = $album_name . " " . $meta_fb_desc . " - A Bishnupriya Manipuri Album | Amar Ela - Site of Bishnupriya Manipuri songs under KAAKAI Newspaper.";
-		define('PAGE_DESCRIPTION', $description);
-		$keyword = $album_name . " songs , " + $album_name . " online songs, " . $album_name . "online play";
-		define('PAGE_KEYWORDS', $keyword);
-		$album_image_location = "album-image/".$album_image_name;
-		define("ALBUM_IMAGE", $album_image_location);
+		if (!isset($streamable_album_id) || !$streamable_album_id || $streamable_album_id == "") {
+			echo "invalid album id";
+			exit();
+		}
+		$PAGE_TITLE = $album_name . " | " . SITE_NAME;
+		$PAGE_DESCRIPTION = $album_name . " " . $meta_fb_desc . " - A Bishnupriya Manipuri Album | Amar Ela - Site of Bishnupriya Manipuri songs under KAAKAI Newspaper.";
+		$PAGE_KEYWORDS = $album_name . " songs , " + $album_name . " online songs, " . $album_name . "online play";
+		$album_image_location = $ALBUM_IMAGE = "album-image/".$album_image_name;
 		 
 	}
 	include "header-v2.php";
@@ -45,19 +46,20 @@
     <script src="audioplayerengine/amazingaudioplayer.js"></script>
     <link rel="stylesheet" type="text/css" href="audioplayerengine/initaudioplayer-1.css">
     <script src="audioplayerengine/initaudioplayer-1.js"></script>
+		<br/><br/><br/>
 		<div style="width:100%;">
 			<div class="row">
 				<div class="span10" style="margin-left:2.8%">
 					<div class='player-head'>
 						<div class="" style="float:left">
-							<img width="200px" src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2015/07/1436439824nodejs-logo.png"/>
+							<img width="220px" src="<?php echo $album_image_location; ?>"/>
 						</div>
 						<div class="" style="float:left;">
-								<p class="less-margin">&nbsp;&nbsp;&nbsp; <font size="6px">Node.js - tutorial</font></p>
+								<p class="less-margin">&nbsp;&nbsp;&nbsp; <font size="6px"><?php echo $album_name; ?></font></p>
+								<p class="less-margin">&nbsp;&nbsp;&nbsp; <i><?php echo $meta_fb_desc; ?></i></p>
 								<br/>
-								<p class="less-margin">&nbsp;&nbsp;&nbsp; Added By: John Fr. Deson</p>
-								<p class="less-margin">&nbsp;&nbsp;&nbsp; Total Pages: </p>
 								<p class="less-margin">&nbsp;&nbsp;&nbsp; <a class="btn btn-info" style="border-radius: 0px;" href="">Follow</a></p>
+								
 								<p class="less-margin">&nbsp;&nbsp;&nbsp; Total 120 followers</p>
 						</div>
 					</div>
