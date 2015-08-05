@@ -99,7 +99,7 @@
 						
 						while($row = mysql_fetch_array($get_similar_albums_result))
 						{
-							echo $row['album_name'];
+							
 						}
 						$total_no_of_similar_albums = mysql_num_rows($get_similar_albums_result);
 						if ($total_no_of_similar_albums < $maximum_albums_to_be_shown) {
@@ -109,7 +109,13 @@
 							
 							while($row = mysql_fetch_array($get_similar_albums_result))
 							{
-								echo $row['album_name'];
+								$image_location = "album-image/".$row['album_image_location'];
+							?>
+							<div style="position: relative; left: 0; top: 0;">
+								<img width="60px" src="<?php echo $image_location; ?>" style="position: relative; top: 0; left: 0;"/>
+								<img width="20px" src="img/play_btn.png" style="position: absolute; top: 10px; left: 21px;"/>
+							</div>
+							<?php
 							}
 						}
 							
