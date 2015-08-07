@@ -109,17 +109,44 @@
 							
 							while($row = mysql_fetch_array($get_similar_albums_result))
 							{
+								$id = $row['id'];
 								$image_location = "album-image/".$row['album_image_location'];
 							?>
 							<div style="position: relative; left: 0; top: 0;">
-								<img width="60px" src="<?php echo $image_location; ?>" style="position: relative; top: 0; left: 0;"/>
-								<img width="20px" src="img/play_btn.png" style="position: absolute; top: 10px; left: 21px;"/>
+								<img width="60px" src="<?php echo $image_location; ?>" id="mainImageId<?php echo $id; ?>" onmouseover="mouseOnImage(<?php echo $id; ?>)" onmouseout="mouseOutOfImage(<?php echo $id; ?>)" style="position: relative; top: 0; left: 0;"/>
+								<img width="20px" class="playBtnClass" src="img/play_btn.png" id="playBtnId<?php echo $id; ?>" style="position: absolute; top: 10px; left: 21px;"/>
+								<span onmouseover="mouseOnImage(<?php echo $id; ?>)" onmouseout="mouseOutOfImage(<?php echo $id; ?>)" id="albumNameId<?php echo $id; ?>">&nbsp;<?php echo $row['album_name']; ?></span>
 							</div>
+							
+							<br/>
 							<?php
 							}
 						}
 							
 					?>
+					<br/><br/><br/><br/><br/>
+					<script>
+					$(document).ready(function(){
+						$(".playBtnClass").hide();
+					});
+						function mouseOnImage(imageId) {
+							$("#mainImageId"+imageId).addClass("contrast").css({
+								"cursor": "pointer"
+							});
+							$("#playBtnId"+imageId).show().css({
+								"cursor": "pointer"
+							});
+							$("#albumNameId"+imageId).addClass("invert").css({
+								"cursor": "pointer"
+							});
+						}
+						
+						function mouseOutOfImage(imageId) {
+							$(".playBtnClass").hide();
+							$("#mainImageId"+imageId).removeClass("contrast");
+							$("#albumNameId"+imageId).removeClass("invert");
+						}
+					</script>
 				</div>
 			</div>
 		<?php	

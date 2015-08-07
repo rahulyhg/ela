@@ -333,7 +333,7 @@
 }
 .saturate {-webkit-filter: saturate(3);}
 .grayscale {-webkit-filter: grayscale(100%);}
-.contrast {-webkit-filter: contrast(160%);}
+.contrast {-webkit-filter: contrast(50%);}
 .brightness {-webkit-filter: brightness(0.25);}
 .blur {-webkit-filter: blur(3px);}
 .invert {-webkit-filter: invert(100%);}
