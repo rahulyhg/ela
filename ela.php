@@ -49,7 +49,8 @@
 		<br/><br/><br/>
 		<div style="width:100%;">
 			<div class="row">
-				<div class="span10" style="margin-left:2.8%">
+				<div class="span10 bg-header-player" style="margin-left:2.8%">
+				<br/>
 					<div class='player-head'>
 						<div class="" style="float:left">
 							<img width="220px" src="<?php echo $album_image_location; ?>"/>
@@ -73,8 +74,10 @@
 							<?php
 							$get_streamable_songs_details = "SELECT song_details.song_name, song_details.song_link, song_details.song_artist, song_details.song_contributing_artist, song_details.song_genre, song_details.added_by FROM song_details INNER JOIN streamable_songs ON streamable_songs.streamable_album_id='$streamable_album_id' AND streamable_songs.song_id=song_details.id";
 							$result = Database::getInstance()->query($get_streamable_songs_details);
+							$countTotalTracks = 0;
 							while($row = mysql_fetch_array($result))
 							{
+								$countTotalTracks++;
 								$song_name = $row['song_name'];
 								$song_location = "audios/".$row['song_link'];
 								$song_artist = $row['song_artist'];
@@ -92,8 +95,10 @@
 					</div>
 				</div>
 				<div class="span3">
+					<p class="" style="font-size: 16px"> Explore Similar Albums</p>
+					<br/>
 					<?php
-						$maximum_albums_to_be_shown = 4;
+						$maximum_albums_to_be_shown = $countTotalTracks;
 						$get_similar_albums = "SELECT * FROM streamable_album WHERE album_type LIKE '%$album_type%' AND album_type != '$album_type' ORDER BY RAND() LIMIT $maximum_albums_to_be_shown";
 						$get_similar_albums_result = Database::getInstance()->query($get_similar_albums);
 						
@@ -111,14 +116,15 @@
 							{
 								$id = $row['id'];
 								$image_location = "album-image/".$row['album_image_location'];
+								$url = "http://localhost/ela/ela.php?a=$row[album_name]";
 							?>
-							<div style="position: relative; left: 0; top: 0;">
+							<a href="<?php echo $url; ?>" style="position: relative; left: 0; top: 0; text-decoration:none;">
 								<img width="60px" src="<?php echo $image_location; ?>" id="mainImageId<?php echo $id; ?>" onmouseover="mouseOnImage(<?php echo $id; ?>)" onmouseout="mouseOutOfImage(<?php echo $id; ?>)" style="position: relative; top: 0; left: 0;"/>
-								<img width="20px" class="playBtnClass" src="img/play_btn.png" id="playBtnId<?php echo $id; ?>" style="position: absolute; top: 10px; left: 21px;"/>
+								<img width="20px" onmouseover="mouseOnImage(<?php echo $id; ?>)" class="playBtnClass" src="img/play_btn.png" id="playBtnId<?php echo $id; ?>" style="position: absolute; top: -1px; left: 21px;"/>
 								<span onmouseover="mouseOnImage(<?php echo $id; ?>)" onmouseout="mouseOutOfImage(<?php echo $id; ?>)" id="albumNameId<?php echo $id; ?>">&nbsp;<?php echo $row['album_name']; ?></span>
-							</div>
+							</a>
 							
-							<br/>
+							<br/><br/>
 							<?php
 							}
 						}
@@ -130,15 +136,9 @@
 						$(".playBtnClass").hide();
 					});
 						function mouseOnImage(imageId) {
-							$("#mainImageId"+imageId).addClass("contrast").css({
-								"cursor": "pointer"
-							});
-							$("#playBtnId"+imageId).show().css({
-								"cursor": "pointer"
-							});
-							$("#albumNameId"+imageId).addClass("invert").css({
-								"cursor": "pointer"
-							});
+							$("#mainImageId"+imageId).addClass("contrast sidebarlink");
+							$("#playBtnId"+imageId).show().addClass("sidebarlink");
+							$("#albumNameId"+imageId).addClass("invert sidebarlink");
 						}
 						
 						function mouseOutOfImage(imageId) {
