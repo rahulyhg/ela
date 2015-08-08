@@ -11,7 +11,7 @@ include "header.php";
 <?php
 if(isset($_GET['album_id']))
 {
-	$album_id = $_GET['album_id'];
+	$album_id = textSafety($_GET['album_id']);
 	$result = Database::getInstance()->query("SELECT * FROM album_details WHERE id='$album_id'");
 	while($row = mysql_fetch_array($result))
 	{						
@@ -312,17 +312,16 @@ else
 								else
 								{
 									echo "<input style='' type='text' placeholder='search here . . .' id='search'>";
-?>
-									<div class="fb-like" data-href="https://www.facebook.com/bm.amarela" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-										
+?>									
+									<div class="fb-like" data-href="https://www.facebook.com/bm.amarela" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>									&nbsp;&nbsp;&nbsp;																		<?php									$check_album_availability = "SELECT EXISTS(SELECT 1 FROM streamable_album WHERE album_id='$album_id')";									$check_album_availability_result = Database::getInstance()->query($check_album_availability);										while($row = mysql_fetch_array($check_album_availability_result)){											if ($row[0]){									?>												<a href="ela.php?a=<?php echo $album_name; ?>" style="position: relative; left: 0; top: 0; text-decoration:none; cursor:pointer" class="pull-right">													<img width="100px" src="img/listen-online.png" style="position: relative; top: 0; left: 0;"/>													<img width="20px" id="blink_me" src="img/play_btn.png" style="position: absolute; top: 12px; left: 43px; cursor:pointer;"/>												</a>									<?php											
+											}
+										}									?>									
 <?php
 									echo "<table class='table table-striped' id='searchTable'>
 										<tr>
 											<th>Song Name</th>
 											<th>Artist</th>
 											<th>Contr. Artist</th>
-											<th>Year</th>
-											<th>Genre</th>
 											<th>Added By <br/><font size='2px'>&nbsp;&nbsp;(Details)</font></th>
 										</tr>";					
 									while($row1 = mysql_fetch_array($result1))
@@ -330,8 +329,6 @@ else
 										echo "<tr><tbody><td><a href='$row1[song_link]' target='_blank'>" . $row1['song_name'] . "</a></td>";
 										echo "<td>" . $row1['song_artist'] . "</td>";
 										echo "<td>" . $row1['song_contributing_artist'] . "</td>";
-										echo "<td>" . $row1['song_year'] . "</td>";
-										echo "<td>" . $row1['song_genre'] . "</td>";
 										$added_by = $row1['added_by'];
 										$user_result = Database::getInstance()->query("SELECT * FROM user_details WHERE name='$added_by'");
 										while($user_sql = mysql_fetch_array($user_result))
@@ -592,6 +589,6 @@ else
 					return false;
 				}
 			}
-		}
+		}				function blinker() {			$('#blink_me').fadeOut(100).fadeIn(100);		}		setInterval(blinker, 1000); //Runs every second
 	</script>
  <?php include "footer.php"; ?>

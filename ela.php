@@ -10,9 +10,10 @@
         $song_name = textSafety($_GET['s']);
         $is_streamable = TRUE;
     } else {
-        echo "nothing special";
         $is_streamable = FALSE;
-        exit(0);
+        $url="index.php?err=UNKN_ENTRY";
+		header("Refresh:0;URL=$url");
+		exit(0);
     }
     if ($is_streamable && $album_name !== "") {
 		$streamable_album_id = "";
@@ -31,8 +32,9 @@
 			$followers = $row['followers'];
 		}
 		if (!isset($streamable_album_id) || !$streamable_album_id || $streamable_album_id == "") {
-			echo "invalid album id";
-			exit();
+			$url="index.php?err=NOT_STRMBLE";
+			header("Refresh:0;URL=$url");
+			exit(0);
 		}
 		$PAGE_TITLE = $album_name . " | " . SITE_NAME;
 		$PAGE_DESCRIPTION = $album_name . " " . $meta_fb_desc . " - A Bishnupriya Manipuri Album | Amar Ela - Site of Bishnupriya Manipuri songs under KAAKAI Newspaper.";
@@ -54,6 +56,12 @@
     <script src="audioplayerengine/amazingaudioplayer.js"></script>
     <link rel="stylesheet" type="text/css" href="audioplayerengine/initaudioplayer-1.css">
     <script src="audioplayerengine/initaudioplayer-1.js"></script>
+	<script>
+		$(document).ready(function(){
+			$(".playBtnClass").hide();
+			$("#spinner").hide();
+		});
+	</script>
 		<br/><br/><br/>
 		<div style="width:100%;">
 			<div class="row">
@@ -111,12 +119,23 @@
 					<br/>
 					<?php
 						$maximum_albums_to_be_shown = $countTotalTracks;
-						$get_similar_albums = "SELECT * FROM streamable_album WHERE album_type LIKE '%$album_type%' AND album_type != '$album_type' ORDER BY RAND() LIMIT $maximum_albums_to_be_shown";
+						$get_similar_albums = "SELECT * FROM streamable_album WHERE album_type LIKE '%$album_type%' AND album_name != '$album_name' ORDER BY RAND() LIMIT $maximum_albums_to_be_shown";
 						$get_similar_albums_result = Database::getInstance()->query($get_similar_albums);
 						
 						while($row = mysql_fetch_array($get_similar_albums_result))
 						{
+							$id = $row['id'];
+								$image_location = "album-image/".$row['album_image_location'];
+								$url = "http://localhost/ela/ela.php?a=$row[album_name]";
+							?>
+							<a href="<?php echo $url; ?>" target="_blank" style="position: relative; left: 0; top: 0; text-decoration:none;">
+								<img width="60px" src="<?php echo $image_location; ?>" id="mainImageId<?php echo $id; ?>" onmouseover="mouseOnImage(<?php echo $id; ?>)" onmouseout="mouseOutOfImage(<?php echo $id; ?>)" style="position: relative; top: 0; left: 0;"/>
+								<img width="20px" onmouseover="mouseOnImage(<?php echo $id; ?>)" class="playBtnClass" src="img/play_btn.png" id="playBtnId<?php echo $id; ?>" style="position: absolute; top: -1px; left: 21px;"/>
+								<span onmouseover="mouseOnImage(<?php echo $id; ?>)" onmouseout="mouseOutOfImage(<?php echo $id; ?>)" id="albumNameId<?php echo $id; ?>">&nbsp;<?php echo $row['album_name']; ?></span>
+							</a>
 							
+							<br/><br/>
+							<?php
 						}
 						$total_no_of_similar_albums = mysql_num_rows($get_similar_albums_result);
 						if ($total_no_of_similar_albums < $maximum_albums_to_be_shown) {
@@ -130,7 +149,7 @@
 								$image_location = "album-image/".$row['album_image_location'];
 								$url = "http://localhost/ela/ela.php?a=$row[album_name]";
 							?>
-							<a href="<?php echo $url; ?>" style="position: relative; left: 0; top: 0; text-decoration:none;">
+							<a href="<?php echo $url; ?>" target="_blank" style="position: relative; left: 0; top: 0; text-decoration:none;">
 								<img width="60px" src="<?php echo $image_location; ?>" id="mainImageId<?php echo $id; ?>" onmouseover="mouseOnImage(<?php echo $id; ?>)" onmouseout="mouseOutOfImage(<?php echo $id; ?>)" style="position: relative; top: 0; left: 0;"/>
 								<img width="20px" onmouseover="mouseOnImage(<?php echo $id; ?>)" class="playBtnClass" src="img/play_btn.png" id="playBtnId<?php echo $id; ?>" style="position: absolute; top: -1px; left: 21px;"/>
 								<span onmouseover="mouseOnImage(<?php echo $id; ?>)" onmouseout="mouseOutOfImage(<?php echo $id; ?>)" id="albumNameId<?php echo $id; ?>">&nbsp;<?php echo $row['album_name']; ?></span>
@@ -166,10 +185,7 @@
 								}
 							});
 						}
-						$(document).ready(function(){
-							$(".playBtnClass").hide();
-							$("#spinner").hide();
-						});
+						
 						function mouseOnImage(imageId) {
 							$("#mainImageId"+imageId).addClass("contrast sidebarlink");
 							$("#playBtnId"+imageId).show().addClass("sidebarlink");
