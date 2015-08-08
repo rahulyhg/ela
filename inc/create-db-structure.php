@@ -6,12 +6,16 @@
     Database::getInstance()->query($create_db);
     
     $create_playable_album_table = "CREATE TABLE IF NOT EXISTS streamable_album (id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,"
-            . "album_id INT(11), album_name VARCHAR(250), album_image_location VARCHAR(255), album_type VARCHAR(50), meta_fb_desc TEXT)";
+            . "album_id INT(11), album_name VARCHAR(250), album_image_location VARCHAR(255), album_type VARCHAR(50), meta_fb_desc TEXT, followers INT(11))";
     Database::getInstance()->query($create_playable_album_table);
     
     $create_playable_songs_table = "CREATE TABLE IF NOT EXISTS streamable_songs (id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,"
             . "streamable_album_id INT(11), song_id INT(11))";
     Database::getInstance()->query($create_playable_songs_table);
+	
+	$create_follower_table = "CREATE TABLE IF NOT EXISTS follower_details (id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,"
+			. "streamable_album_id INT(11), ip_address TEXT)";
+	Database::getInstance()->query($create_follower_table);
 	
 	
 	// Delete this in dev. Only for testing

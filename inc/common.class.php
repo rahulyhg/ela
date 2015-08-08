@@ -2,6 +2,9 @@
 /*
 *	similar to mysql_real_escape_string
 */
+function getIpAddress(){
+	return getenv('HTTP_CLIENT_IP')?: getenv('HTTP_X_FORWARDED_FOR')?: getenv('HTTP_X_FORWARDED')?: getenv('HTTP_FORWARDED_FOR')?: getenv('HTTP_FORWARDED')?: getenv('REMOTE_ADDR');
+}
 function textSafety($value)
 {
 	$search = array("\\",  "\x00", "\n",  "\r",  "'",  '"', "\x1a");

@@ -355,3 +355,7 @@
 	background: linear-gradient(45deg, rgba(216,219,223,1) 0%, rgba(238,239,241,0.74) 34%, rgba(255,255,255,0.74) 61%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8dbdf', endColorstr='#ffffff', GradientType=1 );
 }
+
+.text-center{
+	text-align:center
+}

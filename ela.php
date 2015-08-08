@@ -1,5 +1,4 @@
 <?php include_once("inc/create-db-structure.php"); ?>
-
 <?php
     $album_name = "";
     $song_name = "";
@@ -29,6 +28,7 @@
 			$album_image_name = $row['album_image_location'];
 			$album_type = $row['album_type'];
 			$meta_fb_desc = $row['meta_fb_desc'];
+			$followers = $row['followers'];
 		}
 		if (!isset($streamable_album_id) || !$streamable_album_id || $streamable_album_id == "") {
 			echo "invalid album id";
@@ -38,7 +38,15 @@
 		$PAGE_DESCRIPTION = $album_name . " " . $meta_fb_desc . " - A Bishnupriya Manipuri Album | Amar Ela - Site of Bishnupriya Manipuri songs under KAAKAI Newspaper.";
 		$PAGE_KEYWORDS = $album_name . " songs , " + $album_name . " online songs, " . $album_name . "online play";
 		$album_image_location = $ALBUM_IMAGE = "album-image/".$album_image_name;
-		 
+		$is_ip_exist = FALSE;
+		$current_ip_address = getIpAddress();
+		$check_ip_address = "SELECT EXISTS(SELECT 1 FROM follower_details WHERE streamable_album_id = '$streamable_album_id' && ip_address = '$current_ip_address')";
+		$check_ip_address_result = Database::getInstance()->query($check_ip_address);
+		while($row = mysql_fetch_array($check_ip_address_result)){
+			if ($row[0]){
+				$is_ip_exist = TRUE;
+			}
+		}		
 	}
 	include "header-v2.php";
 ?>
@@ -59,12 +67,16 @@
 								<p class="less-margin">&nbsp;&nbsp;&nbsp; <font size="6px"><?php echo $album_name; ?></font></p>
 								<p class="less-margin">&nbsp;&nbsp;&nbsp; <i><?php echo $meta_fb_desc; ?></i></p>
 								<br/>
-								<p class="less-margin">&nbsp;&nbsp;&nbsp; <a class="btn btn-info" style="border-radius: 0px;" href="">Follow</a></p>
-								
-								<p class="less-margin">&nbsp;&nbsp;&nbsp; Total 120 followers</p>
+								<p class="less-margin">&nbsp;&nbsp;&nbsp; 
+									<a onclick="follow('<?php echo $streamable_album_id ;?>')" class="btn btn-info" style="border-radius: 0px;">
+										<span id="followOrUnfollow"><?php if($is_ip_exist) {echo "Following"; } else { echo "Follow"; } ?></span>
+										<img id="spinner" src="img/ajax-loader.gif"/>
+									</a>
+								</p>
+								<p class="less-margin">&nbsp;&nbsp;&nbsp; Total <span id="totalFollowers"><?php echo $followers; ?></span> followers</p>
 						</div>
 					</div>
-				</div>				
+				</div>
 			</div>
 			<div class="row">
 				<div class="span10">
@@ -95,7 +107,7 @@
 					</div>
 				</div>
 				<div class="span3">
-					<p class="" style="font-size: 16px"> Explore Similar Albums</p>
+					<p class="text-center" style="font-size: 16px;"><u> Explore Similar Albums </u></p>
 					<br/>
 					<?php
 						$maximum_albums_to_be_shown = $countTotalTracks;
@@ -132,9 +144,32 @@
 					?>
 					<br/><br/><br/><br/><br/>
 					<script>
-					$(document).ready(function(){
-						$(".playBtnClass").hide();
-					});
+						function follow(streamableId){
+							$("#spinner").show();
+							var dataString = 'id='+ streamableId+"&add=follower";
+							$.ajax({
+								type: "POST",
+								url: "ajax/follow.php",
+								data: dataString,
+								cache: false,
+								success: function(html)
+								{
+									if (html.hasOwnProperty('isFollowed') && html.hasOwnProperty('followers')) {
+										$("#spinner").hide();										
+										$("#totalFollowers").html(html.followers);
+										if (html.isFollowed) {
+											$("#followOrUnfollow").html("Following");
+										} else {
+											$("#followOrUnfollow").html("Follow");
+										}
+									}
+								}
+							});
+						}
+						$(document).ready(function(){
+							$(".playBtnClass").hide();
+							$("#spinner").hide();
+						});
 						function mouseOnImage(imageId) {
 							$("#mainImageId"+imageId).addClass("contrast sidebarlink");
 							$("#playBtnId"+imageId).show().addClass("sidebarlink");
