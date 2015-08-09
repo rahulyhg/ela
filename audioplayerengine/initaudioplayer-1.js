@@ -41,7 +41,7 @@ jQuery(document).ready(function(){
         playpauseimagewidth:24,
         loopimageheight:24,
         tracklistitem:10,
-        tracklistitemformat:"%ID%. <span style='position:relative;top:0;'>%TITLE% - <i> By %ARTIST% </i></span> <span style='position:absolute;top:0;right:0;'>%DURATION%</span>",
+        tracklistitemformat:"%ID%. <span style='position:relative;top:0;'>%TITLE% - <i> By %ARTIST% </i></span> <span style='position:absolute;top:0;right:0;'>%DURATION%</span><a style='position:absolute;top:0;right:5px;' href='%AUDIOURL%' download='%TITLE%.mp3' target='_blank'>Download</a>",
         prevnextimagewidth:24,
         tracklistarrowimage:"tracklistarrow-48-16-0.png",
         playpauseimageheight:24,

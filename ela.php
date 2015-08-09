@@ -99,7 +99,8 @@
 							{
 								$countTotalTracks++;
 								$song_name = $row['song_name'];
-								$song_location = "audios/".$row['song_link'];
+								// $song_location = "audios/".$row['song_link'];
+								$song_location = "audios/".$album_name."/".$song_name.".mp3";
 								$song_artist = $row['song_artist'];
 								$song_contribution_artist = $row['song_contributing_artist'];
 								$song_genre = $row['song_genre'];
