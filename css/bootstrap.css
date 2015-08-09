@@ -6250,3 +6250,26 @@ a.bg-danger:hover {
 	margin: 0 0 0px;
 }
 
+img#listen {
+	margin-left: 83px;
+	margin-top: 33px;
+}
+span#popup-info-content {
+	margin-left: 0px;
+	margin-top: 236px;
+	position: absolute;
+}
+img#popup-logo {
+	margin-left: -192px;
+	margin-top: -59px;
+}
+span#fb-btn {
+	margin-top: -140px;
+	position: absolute;
+	margin-left: -31px;
+}
+input#confirm_no {
+	right: 5px;
+	margin-top: -45px;
+	position: absolute;
+}

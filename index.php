@@ -74,7 +74,7 @@ if ($detect->isMobile() && !$detect->isTablet()) {
 				$('#info').removeClass("hide"); 
 				$("#info").show();
 				$("#info").css('top',$(window).scrollTop()+90);
-				$('#info_content').html("<img src='img/logo/songs_logo.png' width='150'/><br/><font size='2'>This site has lots of unknown songs. Please help us to make it known through comment or mail.</font><br/><br/> <font color='green' size='2'>Without taking owners permission we have collected songs from various sources. If anybody have any problem regarding that, please make us know. </font><br/><br/>Get Updates of our Recent Uploads. <a href='http://www.facebook.com/bm.amarela'>Please Like us on facebook.</a>");
+				$('#info_content').html("<img id='popup-logo' src='img/logo/songs_logo.png' width='150'/><br/><span id='popup-info-content'><i>Listen Online Bishnupriya Manipuri songs.</i></span><img width='400px' id='listen' src='img/listen_girl.png' width='150'/>");
 				$('#confirm_no').click(function(){
 						 $("#info").hide();
 						return false;
@@ -172,10 +172,11 @@ if ($detect->isMobile() && !$detect->isTablet()) {
 			{
 	?>
 				<div id="info" class="hide">
+					<input id='confirm_no' type='button' class="btn btn-danger" value='X' />
 					<div id="info_content"></div>
 					<br/><br/>
-					<input id='confirm_no' type='button' class="btn btn-primary" value='Close' />
-				</div>		
+					<span id='fb-btn'><a href="http://www.facebook.com/bm.amarela"><img width="40px" src="img/facebook_button.png" /></a></span>
+				</div>	
 					<div class="background">
 						<br/>
 						<?php getAlbumListWithContainer("Recently Added", "carousel"); ?>
