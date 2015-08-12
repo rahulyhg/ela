@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+    <title>Your Website Title</title>
+    <!-- You can use open graph tags to customize link previews.
+    Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
+    <meta property="og:url"           content="http://amarela.kaakai.in/test.php" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/home.png" />
+	<meta property="fb:app_id" content="1407103222879429"/> 
+
+	<meta property="fb:admins" content=" 100002233601582"/>
+</head>
+<body>
+
+    <!-- Load Facebook SDK for JavaScript -->
+
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1407103222879429',
+          xfbml      : true,
+          version    : 'v2.4'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- Your like button code -->
+<div class="fb-send" data-href="http://amarela.kaakai.in/test.php"></div>
+
+</body>
+</html>
