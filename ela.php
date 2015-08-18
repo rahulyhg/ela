@@ -24,7 +24,7 @@
 		$result = Database::getInstance()->query($get_streamable_album_details);
 		while($row = mysql_fetch_array($result))
 		{
-			$streamable_album_id = $row['id'];
+			$streamable_album_id = $row['album_id'];
 			$album_id = $row['album_id'];
 			$album_image_name = $row['album_image_location'];
 			$album_type = $row['album_type'];
@@ -37,7 +37,7 @@
 			exit(0);
 		}
 		$PAGE_TITLE = $album_name . " | " . SITE_NAME;
-		$PAGE_DESCRIPTION = $album_name . " " . $meta_fb_desc . " - A Bishnupriya Manipuri Album | Amar Ela - Site of Bishnupriya Manipuri songs under KAAKAI Newspaper.";
+		$PAGE_DESCRIPTION = $album_name . " " . $meta_fb_desc . " | Amar Ela - Site of Bishnupriya Manipuri songs under KAAKAI Newspaper.";
 		$PAGE_KEYWORDS = $album_name . " songs , " + $album_name . " online songs, " . $album_name . "online play";
 		$album_image_location = $ALBUM_IMAGE = "album-image/".$album_image_name;
 		$is_ip_exist = FALSE;
@@ -127,7 +127,7 @@
 						{
 							$id = $row['id'];
 								$image_location = "album-image/".$row['album_image_location'];
-								$url = "http://localhost/ela/ela.php?a=$row[album_name]";
+								$url = "ela.php?a=$row[album_name]";
 							?>
 							<a href="<?php echo $url; ?>" target="_blank" style="position: relative; left: 0; top: 0; text-decoration:none;">
 								<img width="60px" src="<?php echo $image_location; ?>" id="mainImageId<?php echo $id; ?>" onmouseover="mouseOnImage(<?php echo $id; ?>)" onmouseout="mouseOutOfImage(<?php echo $id; ?>)" style="position: relative; top: 0; left: 0;"/>
@@ -148,7 +148,7 @@
 							{
 								$id = $row['id'];
 								$image_location = "album-image/".$row['album_image_location'];
-								$url = "http://localhost/ela/ela.php?a=$row[album_name]";
+								$url = "ela.php?a=$row[album_name]";
 							?>
 							<a href="<?php echo $url; ?>" target="_blank" style="position: relative; left: 0; top: 0; text-decoration:none;">
 								<img width="60px" src="<?php echo $image_location; ?>" id="mainImageId<?php echo $id; ?>" onmouseover="mouseOnImage(<?php echo $id; ?>)" onmouseout="mouseOutOfImage(<?php echo $id; ?>)" style="position: relative; top: 0; left: 0;"/>

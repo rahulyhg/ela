@@ -369,7 +369,7 @@ else
 						}
 						else
 						{
-?>
+?><?php							$check_album_availability = "SELECT EXISTS(SELECT 1 FROM streamable_album WHERE album_id='$album_id')";							$check_album_availability_result = Database::getInstance()->query($check_album_availability);								while($row = mysql_fetch_array($check_album_availability_result)){									if ($row[0]){							?>										<a href="ela.php?a=<?php echo $album_name; ?>" style="position: relative; left: 0; top: 0; text-decoration:none; cursor:pointer" class="pull-right">											<img width="100px" src="img/listen-online.png" style="position: relative; top: 0; left: 0;"/>											<img width="20px" id="blink_me" src="img/play_btn.png" style="position: absolute; top: 12px; left: 43px; cursor:pointer;"/>										</a>							<?php																				}								}							?>
 							<br/>
 							<div class="fb-like" data-href="https://www.facebook.com/bm.amarela" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 							<div class="span2"><br/>

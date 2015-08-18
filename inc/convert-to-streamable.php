@@ -17,7 +17,8 @@
 			. "streamable_album_id INT(11), ip_address TEXT)";
 	Database::getInstance()->query($create_follower_table);
 	
-	/*
+	/**
+	
 	$get_album_details = "SELECT album_details.id, album_details.album_name, album_details.album_type, album_details.file_name, song_details.id FROM song_details INNER JOIN album_details ON song_details.album_id = album_details.id";
 	$get_album_details_result = Database::getInstance()->query($get_album_details);
 	while($row = mysql_fetch_array($get_album_details_result)) {
@@ -26,15 +27,18 @@
 		$album_image_location = $row['file_name'];
 		$album_type = $row['album_type'];
 		$song_id = $row['id'];
-		$insert_playable_data = "INSERT IGNORE INTO streamable_album (`album_id`, `album_name`, `album_image_location`, `album_type`) VALUES ('$album_id', '$album_name', '$album_image_location', '$album_type')";
+		$insert_playable_data = "INSERT IGNORE INTO streamable_album (`album_id`, `album_name`, `album_image_location`, `album_type`, `followers`) VALUES ('$album_id', '$album_name', '$album_image_location', '$album_type', 0)";
 		Database::getInstance()->query($insert_playable_data);
-		$get_last_insert_id = "SELECT id FROM streamable_album WHERE album_id='$album_id' && album_name='$album_name'";
-		$get_last_insert_id_result = Database::getInstance()->query($get_last_insert_id);
-		while($rowa = mysql_fetch_array($get_last_insert_id_result)) {
-			$streamable_album_id = $rowa['id'];
-			$insert_playable_song_data = "INSERT IGNORE INTO streamable_songs (`streamable_album_id`, `song_id`) VALUES ('$streamable_album_id', '$song_id')";
-			Database::getInstance()->query($insert_playable_song_data);
-		}
+		
+		$insert_playable_song_data = "INSERT IGNORE INTO streamable_songs (`streamable_album_id`, `song_id`) VALUES ('$album_id', '$song_id')";
+		Database::getInstance()->query($insert_playable_song_data);
+		// $get_last_insert_id = "SELECT id FROM streamable_album WHERE album_id='$album_id' && album_name='$album_name'";
+		// $get_last_insert_id_result = Database::getInstance()->query($get_last_insert_id);
+		// while($rowa = mysql_fetch_array($get_last_insert_id_result)) {
+			// $streamable_album_id = $rowa['id'];
+			// $insert_playable_song_data = "INSERT IGNORE INTO streamable_songs (`streamable_album_id`, `song_id`) VALUES ('$streamable_album_id', '$song_id')";
+			// Database::getInstance()->query($insert_playable_song_data);
+		// }
 	}
 	
 	*/
